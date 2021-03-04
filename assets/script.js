@@ -11,6 +11,7 @@ var $resetBtn = document.querySelector("#reset-button");
 var timerInterval;
 var questionIndex = 0;
 var scoreBoard = 0;
+var $endGame = document.querySelector("#end-game-container");
 var questions = [
   {
     text: "What is my name?",
@@ -26,6 +27,16 @@ var questions = [
     text: "What is my tortoise's name?",
     correctAnswer: "Gordon",
     options: ["Buck", "Dude", "Torta", "Gordon"],
+  },
+  {
+    text: "What is a JavaScript Primitive object?",
+    correctAnswer: "String",
+    options: ["RAM", "Yarn", "String"],
+  },
+  {
+    text: "A ______ is a named variable passed into a function",
+    correctAnswer: "Parameter",
+    options: ["Parameter", "Function()", "Method()", "Logical Operator"],
   },
 ];
 // added event listener of click to Start button
@@ -47,8 +58,11 @@ $startBtn.addEventListener("click", function (e) {
 // Render Question
 function renderQuestion() {
   //
+  // get the questions from the questions array
   $questionText.textContent = questions[questionIndex].text;
+  // clears out the buttons after click
   $questionOptions.innerHTML = "";
+  // creates a button for each of the answer choices
   questions[questionIndex].options.forEach(function (item) {
     var $btn = document.createElement("button");
     $btn.textContent = item;
@@ -65,8 +79,7 @@ $questionOptions.addEventListener("click", function (e) {
     // add one to the score
     scoreBoard++;
     // Shows the score on the HTML
-    $score.textContent = scoreBoard; 
-    
+    $score.textContent = scoreBoard;     
     console.log(scoreBoard)
     // shows the user they are CORRECT!
     // Should remove itself after 5 seconds
@@ -85,6 +98,9 @@ $questionOptions.addEventListener("click", function (e) {
   }
   // if wrong, show the WRONG text, then clear after 5 seconds
   else {
+    // deduct time from timer
+    var deductTime;
+    
     setInterval(function () {
       var timeLeft = 5;
       timeLeft--;
@@ -100,6 +116,9 @@ $questionOptions.addEventListener("click", function (e) {
   questionIndex++;
   if (questionIndex === questions.length) {
     // End Game
+    $endGame.classList.remove("hide");
+    // var endGameText = $endGame.createElement()
+    
   } else {
     renderQuestion();
   }
@@ -108,7 +127,7 @@ $questionOptions.addEventListener("click", function (e) {
 
 // timer
 function startTimer() {
-  var timeLeft = 10;
+  var timeLeft = 100;
   timerInterval = setInterval(function () {
     timeLeft--;
     $timer.textContent = timeLeft;
