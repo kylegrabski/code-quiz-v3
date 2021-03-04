@@ -37,6 +37,13 @@ $startBtn.addEventListener("click", function () {
     $timer.classList.remove("hide")
     $score.classList.remove("hide")
     startTimer();
+    $questionText.textContent = questions[0].text;
+
+    questions[0].options.forEach(function (item) {
+      var $btn = document.createElement("button");
+      $btn.textContent = item;
+      $questionOptions.append($btn);
+    })
 })
 
 callQuestion();
@@ -52,7 +59,7 @@ function callQuestion(){
     $answerB.append(questions[0].options[1])
     $answerC.append(questions[0].options[2])
     $answerD.append(questions[0].options[3])
-    listIndex();
+    
     
     
     console.log($answerA)
