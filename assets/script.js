@@ -10,6 +10,7 @@ var $wrongReveal = document.querySelector("#wrongReveal");
 var $resetBtn = document.querySelector("#reset-button");
 var timerInterval;
 var questionIndex = 0;
+var scoreBoard = 0;
 var questions = [
   {
     text: "What is my name?",
@@ -45,7 +46,7 @@ $startBtn.addEventListener("click", function (e) {
 
 // Render Question
 function renderQuestion() {
-  // 
+  //
   $questionText.textContent = questions[questionIndex].text;
   $questionOptions.innerHTML = "";
   questions[questionIndex].options.forEach(function (item) {
@@ -61,8 +62,39 @@ $questionOptions.addEventListener("click", function (e) {
   if (!e.target.matches("button")) return;
   var val = e.target.textContent;
   if (val === questions[questionIndex].correctAnswer) {
+    // add one to the score
+    scoreBoard++;
+    // Shows the score on the HTML
+    $score.textContent = scoreBoard; 
+    
+    console.log(scoreBoard)
+    // shows the user they are CORRECT!
+    // Should remove itself after 5 seconds
+    setInterval(function () {
+      var timeLeft = 5;
+      timeLeft--;
+      if (timeLeft > 1) {
+        $rightReveal.classList.remove("hide");
+      } else {
+        $rightReveal.classList.add("hide");
+        clearInterval();
+      }
+    }, 1000);
+
     console.log("you are correct");
-  } else {
+  }
+  // if wrong, show the WRONG text, then clear after 5 seconds
+  else {
+    setInterval(function () {
+      var timeLeft = 5;
+      timeLeft--;
+      if (timeLeft > 1) {
+        $wrongReveal.classList.remove("hide");
+      } else {
+        $wrongReveal.classList.add("hide");
+        clearInterval();
+      }
+    }, 1000);
     console.log("you are wrong");
   }
   questionIndex++;
@@ -89,12 +121,6 @@ function startTimer() {
   }, 1000);
   return timeLeft;
 }
-
-
-
-
-
-
 
 // function callQuestion(){
 //     // get first question from questions array
