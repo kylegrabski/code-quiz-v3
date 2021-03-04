@@ -61,12 +61,14 @@ function callQuestion(){
 }
 
 // https://www.codeproject.com/Questions/701607/How-to-return-value-from-onclick-event-in-javascri
-function listIndex(index) {
-    if (index === '0') {
-        console.log("wrong")
-        $score.append(1);
-    }
-}
+// function listIndex(index) {
+//     if (index === '0') {
+//         console.log("wrong")
+//         $score.append(1);
+//     }
+// }
+
+// onclick="return listIndex('3')" on li
 
 // timer
 function startTimer() {
