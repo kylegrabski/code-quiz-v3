@@ -32,19 +32,45 @@ var questions = [
   },
 ];
 
-$startBtn.addEventListener("click", function (e) {
-  $startPrompt.classList.add("hide");
-  $questionPrompt.classList.remove("hide");
-  $timer.classList.remove("hide");
-  $score.classList.remove("hide");
-  startTimer();
-  $questionText.textContent = questions[0].text;
+// Render Question
+renderQuestion();
 
-  questions[currentQuestion].options.forEach(function (item) {
-    var $btn = document.createElement("button");
-    $btn.textContent = item;
-    $questionOptions.append($btn);
+function renderQuestion() {
+  $startBtn.addEventListener("click", function (e) {
+    $startPrompt.classList.add("hide");
+    $questionPrompt.classList.remove("hide");
+    $timer.classList.remove("hide");
+    $score.classList.remove("hide");
+    startTimer();
+    $questionText.textContent = questions[0].text;
+
+    questions[currentQuestion].options.forEach(function (item) {
+      var $btn = document.createElement("button");
+      $btn.textContent = item;
+      $questionOptions.append($btn);
+    });
   });
+}
+
+$questionOptions.addEventListener("click",  function (e){
+  // iff tartget is not a button exit early
+  if(!e.target.matches("button")) return;
+
+  var val = e.target.textContent;
+  if (val === questions [currentQuestion].correctAnswer) {
+    console.log("you are correct");
+  } else {
+    console.log("you are wrong");
+  }
+  currentQuestion++;
+
+  if(currentQuestion === questions.length){
+
+  }else {
+    renderQuestion();
+  }
+  console.log(val);
+
 });
 
 // timer
@@ -65,12 +91,7 @@ function startTimer() {
     // when timer hits 0, end game
   }, 1000);
   return timeLeft;
-};
-
-
-
-
-
+}
 
 // function callQuestion(){
 //     // get first question from questions array
