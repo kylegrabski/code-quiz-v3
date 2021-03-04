@@ -27,18 +27,25 @@ var questions = [
     options: ["Buck", "Dude", "Torta", "Gordon"],
   },
 ];
-// Render Question
+// added event listener of click to Start button
 $startBtn.addEventListener("click", function (e) {
+  // clicking start button will hide the main prompt
   $startPrompt.classList.add("hide");
+  // will show the question
   $questionPrompt.classList.remove("hide");
+  // will show the timer
   $timer.classList.remove("hide");
+  // will show the score
   $score.classList.remove("hide");
+  // will show the reset button
   $resetBtn.classList.remove("hide");
   startTimer();
   renderQuestion();
 });
 
+// Render Question
 function renderQuestion() {
+  // 
   $questionText.textContent = questions[questionIndex].text;
   $questionOptions.innerHTML = "";
   questions[questionIndex].options.forEach(function (item) {
@@ -48,8 +55,9 @@ function renderQuestion() {
   });
 }
 
+// Walk through this with Jeremy
 $questionOptions.addEventListener("click", function (e) {
-  // iff tartget is not a button exit early
+  // if tartget is not a button exit early
   if (!e.target.matches("button")) return;
   var val = e.target.textContent;
   if (val === questions[questionIndex].correctAnswer) {
