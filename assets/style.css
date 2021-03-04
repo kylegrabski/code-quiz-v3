@@ -1,0 +1,29 @@
+.container {
+    width: 600px;
+    margin: 0 auto;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  #start-prompt {
+    text-align: center;
+  }
+  
+  #timer {
+    position: fixed;
+    padding: 10px;
+    top: 0;
+    right: 0;
+  }
+
+  #score {
+    position: fixed;
+    padding: 10px;
+    top: 0;
+    left: 0;
+  }
+  
+  .hide {
+    display: none;
+  }

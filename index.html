@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Quiz v3</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <div class="hide" id="score">0</div>
+    </div>
+    <div class="container">
+      <!-- Start Prompt -->
+      <div class="text-center" id="start-prompt">
+        <h1>Welcome to the Quiz v.3!!!</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima maxime
+          recusandae officiis soluta voluptatem similique eius facere nisi
+          architecto totam. Molestias maiores iusto voluptatem doloribus
+          voluptatum dolorem distinctio perspiciatis similique!
+        </p>
+        <button id="start-button">Start!</button>
+      </div>
+
+      <!-- Question Block -->
+      <div class="text-center hide" id="question-prompt">
+        <h3 id="question-text"></h3>
+        <ul id="options">
+          <li id="answerA" onclick="return listIndex('0')"></li>
+          <li id="answerB" onclick="return listIndex('1')"></li>
+          <li id="answerC" onclick="return listIndex('2')"></li>
+          <li id="answerD" onclick="return listIndex('3')"></li>
+        </ul>
+      </div>
+
+      <div class="hide"id="rightReveal">CORRECT!</div>
+      <div class="hide"id="wrongReveal">WRONG!</div>
+      <!-- Timer -->
+      <div class="hide" id="timer">100</div>
+    </div>
+    <script src="./assets/script.js"></script>
+  </body>
+</html>
