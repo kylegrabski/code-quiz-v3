@@ -36,6 +36,7 @@ var questions = [
 renderQuestion();
 
 function renderQuestion() {
+  $questionOptions.innerHTML = "";
   $startBtn.addEventListener("click", function (e) {
     $startPrompt.classList.add("hide");
     $questionPrompt.classList.remove("hide");
