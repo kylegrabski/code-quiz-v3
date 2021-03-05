@@ -21,14 +21,14 @@ var timeLeft = 100;
 
 var questions = [
   {
-    text: "What is my name?",
-    correctAnswer: "Kyle",
-    options: ["Kyle", "Ollie", "Michael", "Steve"],
+    text: "Which of the following is NOT a comparison operator?",
+    correctAnswer: "====",
+    options: ["=", "==", "===", "===="],
   },
   {
-    text: "Is the sky blue?",
-    correctAnswer: "True",
-    options: ["True", "False"],
+    text: "The logical NOT operator is ___",
+    correctAnswer: "!",
+    options: ["!", "?", "{}", ";;"],
   },
   {
     text: "What is my tortoise's name?",
@@ -36,7 +36,7 @@ var questions = [
     options: ["Buck", "Dude", "Torta", "Gordon"],
   },
   {
-    text: "What is a JavaScript Primitive object?",
+    text: "Which of the following is a JavaScript Primitive object?",
     correctAnswer: "String",
     options: ["RAM", "Yarn", "String"],
   },
