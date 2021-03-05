@@ -5,17 +5,19 @@ var $questionText = document.querySelector("#question-text");
 var $questionOptions = document.querySelector("#options");
 var $timer = document.querySelector("#timer");
 var $score = document.querySelector("#score");
-var $rightReveal = document.querySelector("#rightReveal");
-var $wrongReveal = document.querySelector("#wrongReveal");
 var $resetBtn = document.querySelector("#reset-button");
 var $highScoreBtn = document.querySelector("#high-score");
 var $viewHighScore = document.querySelector("#highScore");
 var $hideScoreBtn = document.querySelector("#hide-score");
+
 var timerInterval;
+
 var questionIndex = 0;
+
 var scoreBoard = 0;
+
 var timeLeft = 100;
-var $endGame = document.querySelector("#end-game-container");
+
 var questions = [
   {
     text: "What is my name?",
@@ -85,43 +87,18 @@ $questionOptions.addEventListener("click", function (e) {
     // Shows the score on the HTML
     $score.textContent = scoreBoard;     
     console.log(scoreBoard)
-    // shows the user they are CORRECT!
-    // Should remove itself after 5 seconds
-    setInterval(function () {
-      var timeLeft = 5;
-      timeLeft--;
-      if (timeLeft > 1) {
-        $rightReveal.classList.remove("hide");
-      } else {
-        $rightReveal.classList.add("hide");
-        clearInterval();
-      }
-    }, 1000);
-
-    console.log("you are correct");
   }
-  // if wrong, show the WRONG text, then clear after 5 seconds
+  
   else {
     // deduct time from timer
     timeLeft= timeLeft-20;
     $timer.textContent = timeLeft;
-    // setInterval(function () {
-    //   var timeLeft = 5;
-    //   timeLeft--;
-    //   if (timeLeft > 1) {
-    //     $wrongReveal.classList.remove("hide");
-    //   } else {
-    //     $wrongReveal.classList.add("hide");
-    //     clearInterval();
-    //   }
-    // }, 1000);
-    // console.log("you are wrong");
   }
   questionIndex++;
   if (questionIndex === questions.length) {
     // End Game
 
-    $endGame.classList.remove("hide");
+    // $endGame.classList.remove("hide");
     // var endGameText = $endGame.createElement()
     saveScore();
   } else {
@@ -141,7 +118,7 @@ var userName = prompt("Enter you initials to save");
 localStorage.setItem("User", JSON.stringify(userName));
 }
 
-// write foreach to get array items into view score
+// write foreach to get array items into view
 function viewScore () {
   $hideScoreBtn.classList.remove("hide");
   $highScoreBtn.classList.add("hide");
