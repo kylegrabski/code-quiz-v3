@@ -8,9 +8,13 @@ var $score = document.querySelector("#score");
 var $rightReveal = document.querySelector("#rightReveal");
 var $wrongReveal = document.querySelector("#wrongReveal");
 var $resetBtn = document.querySelector("#reset-button");
+var $highScoreBtn = document.querySelector("#high-score");
+var $viewHighScore = document.querySelector("#highScore");
+var $hideScoreBtn = document.querySelector("#hide-score");
 var timerInterval;
 var questionIndex = 0;
 var scoreBoard = 0;
+var timeLeft = 100;
 var $endGame = document.querySelector("#end-game-container");
 var questions = [
   {
@@ -99,35 +103,70 @@ $questionOptions.addEventListener("click", function (e) {
   // if wrong, show the WRONG text, then clear after 5 seconds
   else {
     // deduct time from timer
-    var deductTime;
-    
-    setInterval(function () {
-      var timeLeft = 5;
-      timeLeft--;
-      if (timeLeft > 1) {
-        $wrongReveal.classList.remove("hide");
-      } else {
-        $wrongReveal.classList.add("hide");
-        clearInterval();
-      }
-    }, 1000);
-    console.log("you are wrong");
+    timeLeft= timeLeft-20;
+    $timer.textContent = timeLeft;
+    // setInterval(function () {
+    //   var timeLeft = 5;
+    //   timeLeft--;
+    //   if (timeLeft > 1) {
+    //     $wrongReveal.classList.remove("hide");
+    //   } else {
+    //     $wrongReveal.classList.add("hide");
+    //     clearInterval();
+    //   }
+    // }, 1000);
+    // console.log("you are wrong");
   }
   questionIndex++;
   if (questionIndex === questions.length) {
     // End Game
+
     $endGame.classList.remove("hide");
     // var endGameText = $endGame.createElement()
-    
+    saveScore();
   } else {
     renderQuestion();
   }
   console.log(val);
 });
 
+function saveScore () {
+  // save value to local storage
+  var userArray = [];
+  var scoreArray = [];
+  localStorage.setItem("Score", JSON.stringify(scoreBoard));
+  // save user initials input
+var userName = prompt("Enter you initials to save");
+// saves initial s to local storage
+localStorage.setItem("User", JSON.stringify(userName));
+}
+
+// write foreach to get array items into view score
+function viewScore () {
+  $hideScoreBtn.classList.remove("hide");
+  $highScoreBtn.classList.add("hide");
+console.log("view high scores called")
+var currentScore = localStorage.getItem("Score");
+var currentUser = localStorage.getItem("User");
+console.log("currentScore", currentScore);
+console.log("currentUser", currentUser);
+// print values on screen
+$viewHighScore.classList.remove("hide");
+var $scoreValue = document.createElement("p");
+$scoreValue.innerText = `${currentUser} earned a score of ${currentScore} `
+$viewHighScore.append($scoreValue);
+}
+$hideScoreBtn.addEventListener("click", function(){
+  // hide itself
+  $hideScoreBtn.classList.add("hide");
+  $highScoreBtn.classList.remove("hide");
+$viewHighScore.innerHTML = "";
+  console.log("click")
+})
+$highScoreBtn.addEventListener("click", viewScore);
+
 // timer
 function startTimer() {
-  var timeLeft = 100;
   timerInterval = setInterval(function () {
     timeLeft--;
     $timer.textContent = timeLeft;
@@ -141,24 +180,3 @@ function startTimer() {
   return timeLeft;
 }
 
-// function callQuestion(){
-//     // get first question from questions array
-//     // populate that question on screen
-//     $questionText.append(questions[0].text);
-//     console.log($questionOptions)
-//     // get first answer choices from questions array
-//     $answerA.append(questions[0].options[0])
-//     $answerB.append(questions[0].options[1])
-//     $answerC.append(questions[0].options[2])
-//     $answerD.append(questions[0].options[3])
-//     console.log($answerA)
-//     // populate those answer choices on screen
-// }
-// https://www.codeproject.com/Questions/701607/How-to-return-value-from-onclick-event-in-javascri
-// function listIndex(index) {
-//     if (index === '0') {
-//         console.log("wrong")
-//         $score.append(1);
-//     }
-// }
-// onclick="return listIndex('3')" on li
