@@ -1,3 +1,4 @@
+// variables of all our html selected elements
 var $startPrompt = document.querySelector("#start-prompt");
 var $startBtn = document.querySelector("#start-button");
 var $questionPrompt = document.querySelector("#question-prompt");
@@ -9,7 +10,7 @@ var $resetBtn = document.querySelector("#reset-button");
 var $highScoreBtn = document.querySelector("#high-score");
 var $viewHighScore = document.querySelector("#highScore");
 var $hideScoreBtn = document.querySelector("#hide-score");
-
+// 
 var timerInterval;
 
 var questionIndex = 0;
@@ -76,17 +77,19 @@ function renderQuestion() {
   });
 }
 
-// Walk through this with Jeremy
+// populates ANSWERS, checks if WRONG or RIGHT
 $questionOptions.addEventListener("click", function (e) {
-  // if tartget is not a button exit early
+ 
+  // if tartget value is incorrect exit early
   if (!e.target.matches("button")) return;
+  // val is equal to the click event target's textContent
   var val = e.target.textContent;
+  // if val is equal to the correctAnswer in the question array
   if (val === questions[questionIndex].correctAnswer) {
     // add one to the score
     scoreBoard++;
     // Shows the score on the HTML
     $score.textContent = scoreBoard;     
-    console.log(scoreBoard)
   }
   
   else {
@@ -97,16 +100,15 @@ $questionOptions.addEventListener("click", function (e) {
   questionIndex++;
   if (questionIndex === questions.length) {
     // End Game
-
-    // $endGame.classList.remove("hide");
-    // var endGameText = $endGame.createElement()
     saveScore();
-  } else {
+
+  }
+  else {
     renderQuestion();
   }
-  console.log(val);
 });
 
+// SAVE SCORE function
 function saveScore () {
   // save value to local storage
   var userArray = [];
@@ -118,31 +120,33 @@ var userName = prompt("Enter you initials to save");
 localStorage.setItem("User", JSON.stringify(userName));
 }
 
+
 // write foreach to get array items into view
+// VIEW SCORE function 
 function viewScore () {
   $hideScoreBtn.classList.remove("hide");
   $highScoreBtn.classList.add("hide");
-console.log("view high scores called")
 var currentScore = localStorage.getItem("Score");
 var currentUser = localStorage.getItem("User");
-console.log("currentScore", currentScore);
-console.log("currentUser", currentUser);
 // print values on screen
 $viewHighScore.classList.remove("hide");
 var $scoreValue = document.createElement("p");
 $scoreValue.innerText = `${currentUser} earned a score of ${currentScore} `
 $viewHighScore.append($scoreValue);
 }
+
+// SHOW and HIDE the score buttons
 $hideScoreBtn.addEventListener("click", function(){
   // hide itself
   $hideScoreBtn.classList.add("hide");
   $highScoreBtn.classList.remove("hide");
 $viewHighScore.innerHTML = "";
-  console.log("click")
 })
+
 $highScoreBtn.addEventListener("click", viewScore);
 
-// timer
+
+// TIMER
 function startTimer() {
   timerInterval = setInterval(function () {
     timeLeft--;
